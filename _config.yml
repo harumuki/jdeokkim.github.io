@@ -1,0 +1,13 @@
+# jekyll-paginate configuration
+paginate: 5
+
+# Build settings (https://pages.github.com/versions/)
+markdown: kramdown
+highlighter: rouge
+permalink: none
+plugins: [jekyll-paginate, jekyll-sitemap, jekyll-feed, jekyll-seo-tag]
+
+# Customise atom feed settings (this is where jekyll-feed gets configuration information)
+title: '덕재-tech'
+description: '개발 블로그'
+author: 'jdeokkim'

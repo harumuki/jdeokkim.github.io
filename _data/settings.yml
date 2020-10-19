@@ -1,0 +1,23 @@
+# If you are not using Google Analytics, please change 'google-ID' to an empty string
+google-ID: 'UA-180836351-1'
+
+menu:
+- {name: '소개', path: 'menu', url: 'about.html'}
+- {name: '게시물', path: 'menu', url: 'posts.html'}
+
+# Available social icons are powered by Font Awesome, so you can use any icon that they offer
+social:
+- {icon: 'fab fa-discord', link: 'https://discord.com/invite/..'}
+- {icon: 'fab fa-github', link: 'https://github.com/jdeokkim'}
+- {icon: 'fas fa-envelope', link: 'mailto:jdeokkim@protonmail.com'}
+
+# Customize site text
+pagination:
+  next_page: '다음 >'
+  previous_page: '< 이전'
+
+sharing_button_prompt: ''
+
+related_posts: '관련 글:'
+
+post_date_prefix: '작성 날짜:'
