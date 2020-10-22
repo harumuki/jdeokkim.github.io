@@ -16,8 +16,6 @@ pagination:
   next_page: '다음 >'
   previous_page: '< 이전'
 
-sharing_button_prompt: ''
-
 related_posts: '관련 글:'
 
 post_date_prefix: '작성 날짜:'
