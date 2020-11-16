@@ -3,9 +3,11 @@ layout: page
 title: 소개
 ---
 
-반갑습니다. 게임 개발, 운영 체제와 임베디드 소프트웨어에 관심이 많은 ~~대학생 프로그래머~~ 군인입니다.
+반갑습니다. 게임 개발, 운영 체제와 임베디드 소프트웨어에 관심이 많은 대학생 프로그래머입니다.
 
 ## 개인 프로젝트
+
+[areum](https://github.com/jdeokkim/areum): C언어로 만든 기초적인 인텔 8080 CPU 에뮬레이터
 
 [raylib_pong](https://github.com/jdeokkim/raylib_pong): 크로스-플랫폼 C 게임 라이브러리인 [raylib](https://github.com/raysan5/raylib)를 사용하여 만든 "Pong" 게임의 리메이크 버전
 
