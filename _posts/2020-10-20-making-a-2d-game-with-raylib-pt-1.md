@@ -112,7 +112,7 @@ image: "2020-10-20/201020_i00.png"
 ## 우분투 18.04 LTS에서 raylib 라이브러리 빌드하기 {#c3}
 
 ```console
-root@goorm:/workspace/raylib-gamedev# sudo apt install build-essential git
+# sudo apt install build-essential git
 패키지 목록을 읽는 중입니다... 완료
 의존성 트리를 만드는 중입니다
 상태 정보를 읽는 중입니다... 완료
@@ -120,7 +120,7 @@ root@goorm:/workspace/raylib-gamedev# sudo apt install build-essential git
 패키지 git는 이미 최신 버전입니다 (1:2.17.1-1ubuntu0.4).
 0개 업그레이드, 0개 새로 설치, 0개 제거, 20개 업그레이드 안 함.
 
-root@goorm:/workspace/raylib-gamedev# sudo apt-get update
+# sudo apt-get update
 기존:1 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu bionic InRelease
 받기:2 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu bionic-updates InRelease [88.7 kB]
 받기:3 http://ap-northeast-2.ec2.archive.ubuntu.com/ubuntu bionic-backports InRelease [74.6 kB]
@@ -130,7 +130,7 @@ W: An error occurred during the signature verification. The repository is not up
 ... (생략)
 W: Some index files failed to download. They have been ignored, or old ones used instead.
 
-root@goorm:/workspace/raylib-gamedev# sudo apt install libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev
+# sudo apt install libasound2-dev mesa-common-dev libx11-dev libxrandr-dev libxi-dev xorg-dev libgl1-mesa-dev libglu1-mesa-dev
 패키지 목록을 읽는 중입니다... 완료
 의존성 트리를 만드는 중입니다
 상태 정보를 읽는 중입니다... 완료
@@ -155,7 +155,7 @@ libglu1-mesa-dev:amd64 (9.0.0-2.1build1) 설정하는 중입니다 ...
 xorg-dev (1:7.7+19ubuntu7.1) 설정하는 중입니다 ...
 Processing triggers for libc-bin (2.27-3ubuntu1) ...
 
-root@goorm:/workspace/raylib-gamedev#
+#
 ```
 
 - [여기](https://github.com/raysan5/raylib/wiki/Working-on-GNU-Linux)를 참고하여 raylib 라이브러리 빌드에 필요한 추가 도구 및 라이브러리를 설치합니다.
@@ -163,7 +163,7 @@ root@goorm:/workspace/raylib-gamedev#
 <br />
 
 ```console
-root@goorm:/workspace/raylib-gamedev# git clone https://github.com/raysan5/raylib.git
+# git clone https://github.com/raysan5/raylib.git
 Cloning into 'raylib'...
 remote: Enumerating objects: 148, done.
 remote: Counting objects: 100% (148/148), done.
@@ -179,8 +179,8 @@ Checking out files: 100% (739/739), done.
 <br />
 
 ```console
-root@goorm:/workspace/raylib-gamedev# cd raylib/src
-root@goorm:/workspace/raylib-gamedev/raylib/src(master)# make
+# cd raylib/src
+# make
 gcc  -c rglfw.c -Wall -D_DEFAULT_SOURCE -Wno-missing-braces -Werror=pointer-arith -fno-strict-aliasing -std=c99 -fPIC -s -O1 -Werror=implicit-function-declaration -I. -Iexternal/glfw/include -Iexternal/glfw/deps/mingw -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33
 ... (생략)
 ar rcs /workspace/raylib-gamedev/raylib/libraylib.a core.o shapes.o textures.o text.o utils.o rglfw.o models.o raudio.o
@@ -192,7 +192,7 @@ raylib static library generated (libraylib.a) in /workspace/raylib-gamedev/rayli
 <br />
 
 ```console
-root@goorm:/workspace/raylib-gamedev/raylib/src(master)# sudo make install
+# sudo make install
 mkdir --parents --verbose /usr/local/lib
 mkdir --parents --verbose /usr/local/include
 cp --update --verbose /workspace/raylib-gamedev/raylib/libraylib.a /usr/local/lib/libraylib.a
@@ -209,8 +209,8 @@ raylib development files installed/updated!
 <br />
 
 ```console
-root@goorm:/workspace/raylib-gamedev/raylib/src(master)# cd /workspace/raylib-gamedev
-root@goorm:/workspace/raylib-gamedev# mkdir -p raylib-example/src && cd raylib-example/src
+# cd /workspace/raylib-gamedev
+# mkdir -p raylib-example/src && cd raylib-example/src
 ```
 
 ```c
@@ -274,7 +274,7 @@ void UpdateCurrentScreen(void) {
 <br />
 
 ```console
-root@goorm:/workspace/raylib-gamedev/raylib-example# mkdir bin && gcc src/main.c -o bin/main -std=c99 -O2 -D_DEFAULT_SOURCE -g -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+# mkdir bin && gcc src/main.c -o bin/main -std=c99 -O2 -D_DEFAULT_SOURCE -g -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 ```
 
 ![201020_l01](../assets/img/2020-10-20/201020_l01.png)
