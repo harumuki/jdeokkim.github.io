@@ -24,6 +24,7 @@ image: "2020-10-20/201020_i00.png"
 1. [raylib 라이브러리 소개](#c1)
 2. [윈도우 8.1에서 raylib 라이브러리 빌드하기](#c2)
 3. [우분투 18.04 LTS에서 raylib 라이브러리 빌드하기](#c3)
+4. [우분투 18.04 LTS에서 윈도우 플랫폼용 라이브러리 빌드하기](#c4)
 
 <br />
 
@@ -274,11 +275,82 @@ void UpdateCurrentScreen(void) {
 <br />
 
 ```console
-# mkdir bin && gcc src/main.c -o bin/main -std=c99 -O2 -D_DEFAULT_SOURCE -g -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
+# mkdir bin && gcc src/main.c -o bin/main -g -std=c99 -O2 -D_DEFAULT_SOURCE -lraylib -lGL -lm -lpthread -ldl -lrt -lX11
 ```
 
 ![201020_l01](../assets/img/2020-10-20/201020_l01.png)
 
-- `raylib 라이브러리 예제`를 빌드하고, 결과 파일을 실행합니다.
+- `raylib 라이브러리 예제` 프로젝트를 빌드하고, 결과 파일을 실행합니다.
+
+<br />
+
+## 우분투 18.04 LTS에서 윈도우 플랫폼용 라이브러리 빌드하기 {#c4}
+
+```console
+# sudo apt install gcc-mingw-w64-x86-64
+패키지 목록을 읽는 중입니다... 완료
+의존성 트리를 만드는 중입니다
+상태 정보를 읽는 중입니다... 완료
+다음의 추가 패키지가 설치될 것입니다 :
+  binutils-mingw-w64-x86-64 gcc-mingw-w64-base mingw-w64-common mingw-w64-x86-64-dev
+제안하는 패키지:
+  gcc-7-locales wine64
+다음 *새로운* 패키지들을 설치:
+  binutils-mingw-w64-x86-64 gcc-mingw-w64-base gcc-mingw-w64-x86-64 mingw-w64-common mingw-w64-x86-64-dev
+0개 업그레이드, 5개 새로 설치, 0개 제거, 112개 업그레이드 안 함.
+44.2 M바이트 아카이브를 받아야 합니다.
+이 작업 후 303 M바이트의 디스크 공간을 더 사용하게 됩니다.
+계속 하시겠습니까? [Y/n] Y
+... (생략)
+mingw-w64-common (5.0.3-1) 설정하는 중입니다 ...
+mingw-w64-x86-64-dev (5.0.3-1) 설정하는 중입니다 ...
+gcc-mingw-w64-x86-64 (7.3.0-11ubuntu1+20.2build1) 설정하는 중입니다 ...
+```
+
+- 우분투 18.04 LTS에서 raylib 프로젝트를 윈도우 플랫폼용으로 크로스 컴파일 (cross compile)하기 위해 `gcc-mingw-w64-x86-64` 패키지를 설치해줍니다.
+
+<br />
+
+```console
+# cd raylib/src
+# make clean
+rm -fv *.o /workspace/raylib-gamedev/raylib/libraylib.a /workspace/raylib-gamedev/raylib/libraylib.bc /workspace/raylib-gamedev/raylib/libraylib.so*
+'core.o'가 삭제됨
+'models.o'가 삭제됨
+'raudio.o'가 삭제됨
+'rglfw.o'가 삭제됨
+'shapes.o'가 삭제됨
+'text.o'가 삭제됨
+'textures.o'가 삭제됨
+'utils.o'가 삭제됨
+'/workspace/raylib-gamedev/raylib/libraylib.a'가 삭제됨
+removed all generated files!
+```
+
+- `make clean` 명령어로 이전에 raylib를 빌드할 때 생성된 목적 파일 (object file)을 모두 제거해줍니다.
+
+<br />
+
+```console
+# make OS=Windows_NT CC=x86_64-w64-mingw32-gcc AR=x86_64-w64-mingw32-ar
+x86_64-w64-mingw32-gcc -c core.c -Wall -D_DEFAULT_SOURCE -Wno-missing-braces -Werror=pointer-arith -fno-strict-aliasing -std=c99 -s -O1 -Werror=implicit-function-declaration -I. -Iex
+ternal/glfw/include -Iexternal/glfw/deps/mingw -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33
+... (생략)
+ar rcs ../src/libraylib.a core.o shapes.o textures.o text.o utils.o rglfw.o models.o raudio.o
+raylib static library generated (libraylib.a) in ../src!
+
+# mv libraylib.a ../libraylib_l2w.a
+```
+
+- `make` 명령어로 raylib를 윈도우 플랫폼용 정적 라이브러리로 빌드합니다.
+
+<br />
+
+```console
+# mkdir bin
+# x86_64-w64-mingw32-gcc src/main.c -o bin/main.exe -g -I../raylib/src -O2 -std=c99 -L../raylib -Wl,--subsystem,windows -mwindows -lraylib_l2w -lopengl32 -lgdi32 -lwinmm -lpthread
+```
+
+- [우분투 18.04 LTS에서 raylib 라이브러리 빌드하기](#c3)에서 했던 것과 똑같이 `raylib` 프로젝트 폴더를 하나 만들고, `src/main.c`에 코드를 입력한 다음, `x86_64-w64-mingw32-gcc` 컴파일러를 사용해 프로젝트를 빌드하면, `main.exe`가 생성됩니다.
 
 <br />
